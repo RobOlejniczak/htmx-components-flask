@@ -1,4 +1,4 @@
-from urllib.parse import urlencode
+import werkzeug
 from flask import Blueprint, request
 from lxml import etree, html
 
@@ -13,8 +13,8 @@ def jinja_globals():
 
 
 @htmx_components_flask.app_template_filter("url_encode")
-def url_encode_filter(s: dict) -> str:
-    return urlencode(s)
+def url_encode(s: str) -> str:
+    return werkzeug.urls.url_encode(s)
 
 
 @htmx_components_flask.app_template_filter("partition")
